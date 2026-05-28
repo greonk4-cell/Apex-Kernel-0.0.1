@@ -94,7 +94,7 @@ void main(void)		/* This really IS void, no error here. */
 		init();
 	}
 /*
- *   NOTE!!   For any other task 'pause()' would mean we have to get a
+ * NOTE!!   For any other task 'pause()' would mean we have to get a
  * signal to awaken, but task0 is the sole exception (see 'schedule()')
  * as task 0 gets activated at every idle moment (when no other tasks
  * can run). For task0 'pause()' just means we go check if some other
@@ -130,6 +130,19 @@ void init(void)
 	printf("%d buffers = %d bytes buffer space\n\r",NR_BUFFERS,
 		NR_BUFFERS*BLOCK_SIZE);
 	printf(" Ok.\n\r");
+
+	/* === НАЧАЛО УТИЛИТЫ ХАРАКТЕРИСТИК APEX KERNEL === */
+	printf("\n\r===========================================\n\r");
+	printf("  APEX SYSTEM UTILITY v1.0\n\r");
+	printf("-------------------------------------------\n\r");
+	printf("  OS Name:       Apex Kernel\n\r");
+	printf("  Base Core:     Linux v0.0.1\n\r");
+	printf("  Block Size:    %d bytes\n\r", BLOCK_SIZE);
+	printf("  Total Buffers: %d\n\r", NR_BUFFERS);
+	printf("  Buffer Memory: %d bytes\n\r", NR_BUFFERS * BLOCK_SIZE);
+	printf("===========================================\n\r\n\r");
+	/* === КОНЕЦ УТИЛИТЫ === */
+
 	if ((i=fork())<0)
 		printf("Fork failed in init\r\n");
 	else if (!i) {
@@ -145,4 +158,3 @@ void init(void)
 	sync();
 	_exit(0);	/* NOTE! _exit, not exit() */
 }
-
